@@ -164,8 +164,8 @@ class UltimateLegalIngestor:
 
 if __name__ == "__main__":
     CONFIG = {
-        "GROUP_ID": "2017772342268142382",
-        "API_KEY": "sk-cp-xS6pR0b084LM58KHdamilssG8Vhpp9PxNDirB-bc2jiqHIEsVjZvrWZIfoUif1vy7g3g1ttqyqU6X6aFpsiXSg2HJXtM-66HKgQE2Zst6o7gZh3kLV9UQBA",
+        "GROUP_ID": "201777234226814****",
+        "API_KEY": "sk-cp-xS6pR0b084LM58KHdamilssG8Vhpp9PxNDirB-bc2jiqHIEsVjZvrWZIfoUif1vy7g3g1ttqyqU6X6aFpsiXSg2HJXtM-66HKgQE2Zst6o7gZh3kLV9****",
         "COLLECTION": "legal_ocr_v1",
         "DATA_PATH": "/Volumes/lexar/openclawpdf/zhidu",
         "PROGRESS_FILE": "ocr_ingest_progress.json"
