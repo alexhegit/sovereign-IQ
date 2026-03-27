@@ -1,0 +1,16 @@
+[project]
+name = "sovereign-iq"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "paddleocr>=3.4.0",
+    "pdf2image>=1.17.0",
+    "pymilvus>=2.6.10",
+    "pypdf>=6.9.2",
+    "python-docx>=1.2.0",
+    "python-pptx>=1.0.2",
+    "requests>=2.33.0",
+    "tqdm>=4.67.3",
+]
