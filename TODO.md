@@ -5,6 +5,9 @@
 - [ ] Spark云端节点如何访问  @shaohui
 
 - [ ] 本地模型优化部署。 nemotron-3-supper, Nemotron-3-Nano-4B, Mistral-Small-4,Qwen3.5-27B/35B, GLM-4.7-Flash， 优先考虑NVFP4+vLLM, 容器化部署。 @alexhegit
+      Reference:
+      - How to deploy nemotron-3-supper: https://github.com/NVIDIA-NeMo/Nemotron/blob/main/usage-cookbook/Nemotron-3-Super/AdvancedDeploymentGuide/README.md  , => Config C — NVFP4, DGX Spark
+
 
 - [ ] NVIDIA NEMO API使用调研。
 
