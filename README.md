@@ -30,6 +30,7 @@
 
 ## 系统架构
 
+```
 ┌─────────────────────────────────────────────────────────┐
 │                    Master Coordinator                   │
 │              (流程编排 · 进度追踪 · 报告聚合)              │
@@ -43,6 +44,7 @@
 │              Milvus 向量知识库 (9 集合)                   │
 │   专家私有库 × 7  ·  协作共享库 × 1  ·  归档库 × 1          | 
 └─────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -88,7 +90,6 @@
 
 > 所有模型通过 Ollama 本地部署于 NVIDIA DGX Spark（GB10, 128GB Unified Memory）。6 位专家共享 Qwen3.5-35B-A3B-FP8（262K 超长上下文，Blackwell FP8 量化），Coordinator 由 Nemotron-Cascade-2-30B-A3B 独立承担协调与编排，角色通过 System Prompt（SOUL.md）+ 独立 Milvus Collection 实现知识物理隔离。
 
----
 
 ## 技术栈
 
@@ -103,7 +104,6 @@
 | **文档解析** | PyMuPDF（空间 PDF 解析）、python-docx |
 | **数据源** | 企查查 MCP、Tavily、Exa、AkShare |
 
----
 
 ## 知识管线
 
@@ -121,6 +121,7 @@
 
 ## 项目结构
 
+```
 sovereign-IQ/
 ├── milvus_knowlege_setup/        # 知识管线脚本
 │   ├── 1#env_setup.py
@@ -144,8 +145,8 @@ sovereign-IQ/
 ├── 部分调研资料/                      # 调研资料
 ├── SIQ_系统介绍_技术文档.pdf
 └── TODO.md
+```
 
----
 
 ## 测试图片
 
