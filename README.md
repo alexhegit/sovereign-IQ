@@ -24,17 +24,17 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    Master Coordinator                    │
-│              (流程编排 · 进度追踪 · 报告聚合)              │
+│                    Master Coordinator                   │
+│              (流程编排 · 进度追踪 · 报告聚合)               │
 ├─────────┬──────────┬──────────┬──────────┬──────────────┤
-│Strategist│Sector    │Finance   │Legal     │Risk          │
-│宏观策略   │行业分析   │财务审计   │法务合规   │风控评估       │
+│ Strategist │ Sector  │ Finance │ Legal │ Risk        │
+│   宏观策略   │ 行业分析  │ 财务审计  │ 法务合规  │ 风控评估      │
 ├─────────┴──────────┴──────────┴──────────┴──────────────┤
-│                     IC Chairman                          │
+│                    IC Chairman                          │
 │               (综合裁决 · Go/No-Go 决策)                  │
-├─────────────────────────────────────────────────────────┤
+└─────────────────────────────────────────────────────────┘
 │              Milvus 向量知识库 (9 集合)                    │
-│    专家私有库 × 7  ·  协作共享库 × 1  ·  归档库 × 1        │
+│   专家私有库 × 7  ·  协作共享库 × 1  ·  归档库 × 1        │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -68,19 +68,19 @@
 
 ## 模型配置
 
-项目按角色分配不同规模的推理模型，实现算力与能力的精准匹配：
+采用「共享专家模型 + 独立协调模型」架构 —— 6 位专家共享同一模型实例，Coordinator 使用独立模型专职协调，在 128GB 显存内实现 7-Agent 并发。
 
 | Agent | 推理模型 | 向量模型 |
 |-------|----------|----------|
-| **IC Chairman** | Nemotron-120B | Qwen3-VL-Embedding-2B (2048 维) |
-| **Finance Auditor** | Nemotron-120B | Qwen3-VL-Embedding-2B (2048 维) |
-| **Sector Expert** | Nemotron-120B | Qwen3-VL-Embedding-2B (2048 维) |
-| **Legal Scanner** | Qwen3-32B | Qwen3-VL-Embedding-2B (2048 维) |
-| **Strategist** | Qwen3-32B | Qwen3-VL-Embedding-2B (2048 维) |
-| **Risk Controller** | Qwen3-32B | Qwen3-VL-Embedding-2B (2048 维) |
-| **Master Coordinator** | Qwen3-32B | Qwen3-VL-Embedding-2B (2048 维) |
+| **IC Chairman** | Qwen3.5-35B-A3B | Qwen3-vl-embedding-2b (1024 维) |
+| **Finance Auditor** | Qwen3.5-35B-A3B | Qwen3-vl-embedding-2b (1024 维) |
+| **Sector Expert** | Qwen3.5-35B-A3B | Qwen3-vl-embedding-2b (1024 维) |
+| **Legal Scanner** | Qwen3.5-35B-A3B | Qwen3-vl-embedding-2b (1024 维) |
+| **Strategist** | Qwen3.5-35B-A3B | Qwen3-vl-embedding-2b (1024 维) |
+| **Risk Controller** | Qwen3.5-35B-A3B | Qwen3-vl-embedding-2b (1024 维) |
+| **Master Coordinator** | Nemotron-Cascade-2-30B-A3B | Qwen3-vl-embedding-2b (1024 维) |
 
-> 所有模型均通过 Ollama 本地部署，Nemotron-120B 驱动核心决策角色（主席/财务/行业），Qwen3-32B 驱动支持角色（法务/战略/风控/协调），向量模型统一采用 Qwen3-VL-Embedding-2B Q8_0 量化。
+> 所有模型通过 Ollama 本地部署于 NVIDIA DGX Spark（GB10, 128GB Unified Memory）。6 位专家共享 Qwen3.5-35B-A3B-FP8（262K 超长上下文，Blackwell FP8 量化），Coordinator 由 Nemotron-Cascade-2-30B-A3B 独立承担协调与编排，角色通过 System Prompt（SOUL.md）+ 独立 Milvus Collection 实现知识物理隔离。
 
 ---
 
@@ -88,12 +88,14 @@
 
 | 层级 | 技术选型 |
 |------|----------|
-| **推理模型** | Nemotron-Cascade-2-30B-A3B、Qwen3-32B（Ollama 本地部署） |
-| **向量模型** | Qwen3-VL-Embedding-2B（vllm) |
-| **向量数据库** | Milvus（HNSW / GPU_CAGRA 索引） |
-| **GPU 加速** | CuPy 向量运算、异步并发注入 |
+| **推理模型** | Qwen3.5-35B-A3B（6 专家共享）、Nemotron-Cascade-2-30B-A3B（Coordinator 独立） |
+| **向量模型** | Qwen3-vl-embedding-2b（1024 维，GPU 加速） |
+| **向量数据库** | Milvus 2.6.13（HNSW GPU 索引，9 个 Collection） |
+| **Agent 框架** | OpenClaw（多 Agent 编排，会话持久化） |
+| **模型服务** | Ollama（本地部署，API 兼容） |
+| **GPU 加速** | CUDA 全链路 + CuPy 向量运算 + Blackwell FP8 Tensor Core |
 | **文档解析** | PyMuPDF（空间 PDF 解析）、python-docx |
-| **数据源** | AkShare、Tavily、Exa、QCC |
+| **数据源** | 企查查 MCP、Tavily、Exa、AkShare |
 
 ---
 
@@ -140,6 +142,12 @@ sovereign-IQ/
 ```
 
 ---
+
+## 测试图片
+
+![3](./pics/3.png)
+
+## ![2](./pics/2.png)
 
 ## License
 

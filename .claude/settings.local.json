@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find C:\\\\Users\\\\Michel\\\\Desktop\\\\hackathon\\\\sovereign-IQ\\\\workspace:*)"
+      "Bash(find C:\\\\Users\\\\Michel\\\\Desktop\\\\hackathon\\\\sovereign-IQ\\\\workspace:*)",
+      "Bash(python -c ':*)"
     ]
   }
 }
