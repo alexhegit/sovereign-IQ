@@ -1,0 +1,6 @@
+{
+  "status": "ERROR",
+  "error": "未找到匹配公司",
+  "search_key": "company",
+  "action": "PAUSE_AND_CLARIFY"
+}
