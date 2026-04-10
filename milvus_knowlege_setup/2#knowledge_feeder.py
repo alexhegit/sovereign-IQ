@@ -2,8 +2,8 @@
 ================================================================================
 PROJECT: Ultra-High-Fidelity Ingestion Engine (V5.8 - Physical IP Patch)
 ARCHITECT: Arthurmao's Programming Assistant (Silicon Valley Elite)
-HARDWARE: NVIDIA GB10 (128GB VRAM) | CUDA 13.0 | 2048-Dim | aarch64
-MODEL: fervent_mcclintock/Qwen3-VL-Embedding-2B:Q8_0
+HARDWARE: NVIDIA GB10 (128GB VRAM) | CUDA 13.0 | 1024-Dim | aarch64
+MODEL: fervent_mcclintock/Qwen3-VL-Embedding-2B
 MILVUS_HOST: 192.168.110.85 (Physical LAN IP)
 ================================================================================
 """
