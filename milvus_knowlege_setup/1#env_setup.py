@@ -31,13 +31,13 @@ else:
 # ------------------
 
 WORKSPACES = {
-    "ic_chairman_ws": "投委会主席 (Nemotron-120B)",
-    "ic_finance_auditor_ws": "财务审计官 (Nemotron-120B)",
-    "ic_sector_expert_ws": "行业专家 (Nemotron-120B)",
-    "ic_legal_scanner_ws": "法务专家 (Qwen3-32B)",
-    "ic_strategist_ws": "战略专家 (Qwen3-32B)",
-    "ic_risk_controller_ws": "风险官 (Qwen3-32B)",
-    "ic_master_coordinator_ws": "投委会秘书 (Qwen3-32B)",
+    "ic_chairman_ws": "投委会主席",
+    "ic_finance_auditor_ws": "财务审计官",
+    "ic_sector_expert_ws": "行业专家",
+    "ic_legal_scanner_ws": "法务专家",
+    "ic_strategist_ws": "战略专家",
+    "ic_risk_controller_ws": "风险官",
+    "ic_master_coordinator_ws": "投委会秘书",
     "ic_collaboration_shared_ws": "协同共享工作区 (项目实时讨论)",
     "ic_archive_sop_ws": "机构历史案例库 (SOP资产)"
 }
