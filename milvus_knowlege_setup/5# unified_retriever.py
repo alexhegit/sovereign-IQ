@@ -21,7 +21,7 @@ logger = logging.getLogger("UnifiedRetriever")
 
 class SovereignRetriever:
     def __init__(self, base_url: str):
-        # 初始化 OpenAI 兼容客户端 (对接本地 Qwen3-Embedding-4B)
+        # 初始化 OpenAI 兼容客户端 (对接本地 Qwen3-VL-Embedding-2B)
         self.client = OpenAI(api_key="EMPTY", base_url=base_url)
         
         # 建立数据库连接
@@ -29,7 +29,7 @@ class SovereignRetriever:
         logger.info("✅ 统一检索模块已连接至 Milvus。")
 
     def _get_query_vector(self, query_text: str) -> List[float]:
-        """将用户问题转化为 2048 维语义向量"""
+        """将用户问题转化为 1024 维语义向量"""
         try:
             res = self.client.embeddings.create(
                 model="fervent_mcclintock/Qwen3-VL-Embedding-2B:Q8_0",
@@ -111,7 +111,7 @@ class SovereignRetriever:
         }
 
 # ==========================================
-# 资深程序员的模拟测试接口
+# 模拟测试接口
 # ==========================================
 if __name__ == "__main__":
     print("Sovereign-IQ 统一高性能检索模块启动...")
